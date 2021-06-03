@@ -1,5 +1,6 @@
 package com.avalitov.quizapp
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
@@ -28,12 +29,15 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var mQuestionsList : ArrayList<Question>? = null
     private var mSelectedOptionPosition : Int = 0
     private var mCorrectAnswers : Int = 0
-
+    private var mUserName : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_questions)
+
+        //getting username from the previous activity
+        mUserName = intent.getStringExtra(Constants.USER_NAME)
 
         tvQuestion = findViewById(R.id.tv_question)
         ivImage = findViewById(R.id.iv_image)
@@ -119,7 +123,13 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         mCurrentPosition <= mQuestionsList!!.size -> {
                             setQuestion()
                         } else -> {
-                            Toast.makeText(this, "You have successfully completed the quiz!", Toast.LENGTH_SHORT).show()
+                            //moving to a final activity
+                            val intent = Intent(this, ResultActivity::class.java)
+                            intent.putExtra(Constants.USER_NAME, mUserName)
+                            intent.putExtra(Constants.CORRECT_ANSWERS, mCorrectAnswers)
+                            intent.putExtra(Constants.TOTAL_QUESTIONS, mQuestionsList!!.size)
+                            startActivity(intent)
+                            finish()
                         }
                     }
                 } else {    //if user has selected an option
@@ -129,6 +139,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                         setAnswerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     } else {    // if the answer is correct
                         mCorrectAnswers++
+                        //TODO: fix multiple answers on the same question
                     }
 
                     setAnswerView(question.correctAnswer, R.drawable.correct_option_border)

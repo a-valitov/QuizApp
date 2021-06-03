@@ -63,12 +63,13 @@
         android:textSize="16sp"
         />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@android:color/white"
+        android:backgroundTint="#FFFFFF"
         android:text="FINISH"
         android:textColor="@color/colorPrimary"
         android:textSize="18sp"
