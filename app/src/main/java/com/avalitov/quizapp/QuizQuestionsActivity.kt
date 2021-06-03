@@ -6,10 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
+import androidx.core.widget.TintableCompoundDrawablesView
 import java.lang.reflect.Type
 
 lateinit var tvQuestion: TextView
@@ -20,6 +19,7 @@ lateinit var tvOptionOne : TextView
 lateinit var tvOptionTwo: TextView
 lateinit var tvOptionThree : TextView
 lateinit var tvOptionFour : TextView
+lateinit var btnSubmit : Button
 
 class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -42,6 +42,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionTwo = findViewById<TextView>(R.id.tv_option_two)
         tvOptionThree = findViewById<TextView>(R.id.tv_option_three)
         tvOptionFour = findViewById<TextView>(R.id.tv_option_four)
+        btnSubmit = findViewById(R.id.btn_submit)
 
         mQuestionsList = Constants.getQuestions()
         //Log.i("Questions Size", "${questionsList.size}")
@@ -52,21 +53,26 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionTwo.setOnClickListener(this)
         tvOptionThree.setOnClickListener(this)
         tvOptionFour.setOnClickListener(this)
+        btnSubmit.setOnClickListener(this)
     }
 
     private fun setQuestion() {
-
-        mCurrentPosition = 1
+        
         val question = mQuestionsList!![mCurrentPosition - 1]
 
         defaultOptionsView()    // set all options to default view (none is selected)
 
+        if(mCurrentPosition == mQuestionsList!!.size) {
+            btnSubmit.text = "FINISH"
+        } else {
+            btnSubmit.text = "SUBMIT"
+        }
+
+        //setting question fields to views
         progressBar.progress = mCurrentPosition
         tvProgress.text = "$mCurrentPosition/" + progressBar.max
-
         tvQuestion.text = question!!.question
         ivImage.setImageResource(question.imageNumber)
-
         tvOptionOne.text = question.OptionOne
         tvOptionTwo.text = question.OptionTwo
         tvOptionThree.text = question.OptionThree
@@ -103,6 +109,58 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
             }
             R.id.tv_option_four -> {
                 selectedOptionView(tvOptionFour, 4)
+            }
+            R.id.btn_submit -> {
+                if(mSelectedOptionPosition == 0) {
+                    mCurrentPosition++
+
+                    when{
+                        mCurrentPosition <= mQuestionsList!!.size -> {
+                            setQuestion()
+                        } else -> {
+                            Toast.makeText(this, "You have successfully completed the quiz!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                } else {    //if user has selected an option
+                    val question = mQuestionsList?.get(mCurrentPosition - 1)
+                    if(question!!.correctAnswer != mSelectedOptionPosition) {
+                        setAnswerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
+                    }
+                    setAnswerView(question.correctAnswer, R.drawable.correct_option_border)
+
+                    if(mCurrentPosition == mQuestionsList!!.size) {
+                        btnSubmit.text = "FINISH"
+                    } else {
+                        btnSubmit.text = "GO TO NEXT QUESTION"
+                    }
+
+                    mSelectedOptionPosition = 0
+                }
+            }
+        }
+    }
+
+    private fun setAnswerView(answer: Int, drawableView: Int) {
+        when(answer){
+            1 -> {
+                tvOptionOne.background = ContextCompat.getDrawable(
+                        this, drawableView
+                )
+            }
+            2 -> {
+                tvOptionTwo.background = ContextCompat.getDrawable(
+                        this, drawableView
+                )
+            }
+            3 -> {
+                tvOptionThree.background = ContextCompat.getDrawable(
+                        this, drawableView
+                )
+            }
+            4 -> {
+                tvOptionFour.background = ContextCompat.getDrawable(
+                        this, drawableView
+                )
             }
         }
     }
