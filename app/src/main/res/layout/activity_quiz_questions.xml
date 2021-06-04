@@ -21,21 +21,23 @@
             android:layout_margin="10dp"
             android:gravity="center"
             android:textColor="#363A43"
-            android:textSize="22sp"
-            android:text="What country does this flag belong to?" />
+            android:textSize="20sp"
+            android:text="Начнём с простого. Кто это?" />
 
         <ImageView
             android:id="@+id/iv_image"
             android:layout_width="wrap_content"
-            android:layout_height="170dp"
+            android:layout_height="300dp"
             android:layout_marginTop="16dp"
-            android:src="@drawable/corona" />
+            android:adjustViewBounds = "true"
+            android:src="@drawable/dog_akita" />
 
         <LinearLayout
             android:id="@+id/ll_progress_details"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginLeft="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             >
@@ -69,10 +71,10 @@
             android:id="@+id/tv_option_one"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:background="@drawable/default_option_border"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="12dp"
             android:textColor="@color/colorTextLightGray"
             android:textSize="18sp"
             tools:text="Your mom" />
@@ -80,10 +82,10 @@
             android:id="@+id/tv_option_two"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:background="@drawable/default_option_border"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="12dp"
             android:textColor="@color/colorTextLightGray"
             android:textSize="18sp"
             tools:text="Old borrow" />
@@ -91,10 +93,10 @@
             android:id="@+id/tv_option_three"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:background="@drawable/default_option_border"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="12dp"
             android:textColor="@color/colorTextLightGray"
             android:textSize="18sp"
             tools:text="Kek" />
@@ -102,10 +104,10 @@
             android:id="@+id/tv_option_four"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="5dp"
             android:background="@drawable/default_option_border"
             android:gravity="center"
-            android:padding="15dp"
+            android:padding="12dp"
             android:textColor="@color/colorTextLightGray"
             android:textSize="18sp"
             tools:text="Sas" />
@@ -113,9 +115,9 @@
             android:id="@+id/btn_submit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_margin="12dp"
             android:background="@color/colorPrimary"
-            android:text="SUBMIT"
+            android:text="ПОДТВЕРДИТЬ"
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold" />
