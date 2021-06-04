@@ -22,6 +22,7 @@ lateinit var tvOptionThree : TextView
 lateinit var tvOptionFour : TextView
 lateinit var btnSubmit : Button
 
+//@Suppress("DEPRECATION")
 class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
 
@@ -35,6 +36,9 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_questions)
+//        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
+//        actionBar?.hide()
+
 
         //getting username from the previous activity
         mUserName = intent.getStringExtra(Constants.USER_NAME)
@@ -59,6 +63,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionThree.setOnClickListener(this)
         tvOptionFour.setOnClickListener(this)
         btnSubmit.setOnClickListener(this)
+        btnSubmit.isClickable = false
     }
 
     private fun setQuestion() {
@@ -67,11 +72,11 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 
         defaultOptionsView()    // set all options to default view (none is selected)
 
-        if(mCurrentPosition == mQuestionsList!!.size) {
-            btnSubmit.text = "FINISH"
-        } else {
+//        if(mCurrentPosition > mQuestionsList!!.size) {
+//            btnSubmit.text = "FINISH1"
+//        } else {
             btnSubmit.text = "SUBMIT"
-        }
+//        }
 
         //setting question fields to views
         progressBar.progress = mCurrentPosition
@@ -82,6 +87,14 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
         tvOptionTwo.text = question.OptionTwo
         tvOptionThree.text = question.OptionThree
         tvOptionFour.text = question.OptionFour
+
+        //enable options so user could pick again
+        tvOptionOne.isClickable = true
+        tvOptionTwo.isClickable = true
+        tvOptionThree.isClickable = true
+        tvOptionFour.isClickable = true
+        btnSubmit.isClickable = false
+
     }
 
     private fun defaultOptionsView() {
@@ -116,7 +129,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 selectedOptionView(tvOptionFour, 4)
             }
             R.id.btn_submit -> {
-                if(mSelectedOptionPosition == 0) {
+                if(mSelectedOptionPosition == 0) {  //if no option is selected?
                     mCurrentPosition++
 
                     when{
@@ -135,11 +148,16 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                 } else {    //if user has selected an option
                     val question = mQuestionsList?.get(mCurrentPosition - 1)
 
+                    //disable options so user couldn't pick
+                    tvOptionOne.isClickable = false
+                    tvOptionTwo.isClickable = false
+                    tvOptionThree.isClickable = false
+                    tvOptionFour.isClickable = false
+
                     if(question!!.correctAnswer != mSelectedOptionPosition) {   //if the answer is incorrect
                         setAnswerView(mSelectedOptionPosition, R.drawable.wrong_option_border_bg)
                     } else {    // if the answer is correct
                         mCorrectAnswers++
-                        //TODO: fix multiple answers on the same question
                     }
 
                     setAnswerView(question.correctAnswer, R.drawable.correct_option_border)
@@ -182,6 +200,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun selectedOptionView(tv: TextView, selectedOptionNumber: Int) {
+        btnSubmit.isClickable = true
         defaultOptionsView()
         mSelectedOptionPosition = selectedOptionNumber
 
