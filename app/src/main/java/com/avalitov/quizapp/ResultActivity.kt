@@ -20,12 +20,12 @@ class ResultActivity : AppCompatActivity() {
         btnFinish = findViewById(R.id.btn_finish)
 
         val username = intent.getStringExtra(Constants.USER_NAME)
-        tvUserName.text = username
+        tvUserName.text = "Поздравляем, $username!"
 
         val totalQuestions = intent.getIntExtra(Constants.TOTAL_QUESTIONS, 0)
         val correctAnswers = intent.getIntExtra(Constants.CORRECT_ANSWERS, 0)
 
-        tvScore.text = "Your score is $correctAnswers out of $totalQuestions!"
+        tvScore.text = "Ваш результат - $correctAnswers из $totalQuestions."
 
         btnFinish.setOnClickListener {
             startActivity(Intent(this, MainActivity::class.java))

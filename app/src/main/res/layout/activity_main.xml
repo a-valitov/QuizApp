@@ -50,19 +50,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
 
-                android:text="Welcome"
-                android:textSize="30sp"
+                android:text="Добро пожаловать"
+                android:textSize="28sp"
                 android:textStyle="bold"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextDarkGray"
                 />
 
             <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp"
+
+            android:text="в Дог Квиз!"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textColor="@color/colorTextDarkGray"
+            />
+
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="2dp"
+                android:layout_marginTop="18dp"
 
-                android:text="Please enter your name"
+                android:text="Введите ваше имя:"
                 android:textSize="16sp"
                 android:textAlignment="center"
                 android:textColor="@color/colorTextLightGray"
@@ -71,7 +83,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 >
 
@@ -79,7 +91,7 @@
                     android:id="@+id/et_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:hint="Имя"
                     android:textColor="@color/colorTextDarkGray"
                     android:textColorHint="@color/colorTextLightGray" />
 
@@ -91,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimary"
-                android:text="Start"
+                android:text="НАЧАТЬ"
                 android:textSize="18sp"
                 android:textColor="@color/white" />
 

@@ -75,7 +75,7 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
 //        if(mCurrentPosition > mQuestionsList!!.size) {
 //            btnSubmit.text = "FINISH1"
 //        } else {
-            btnSubmit.text = "SUBMIT"
+            btnSubmit.text = "ПОДТВЕРДИТЬ"
 //        }
 
         //setting question fields to views
@@ -163,9 +163,9 @@ class QuizQuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     setAnswerView(question.correctAnswer, R.drawable.correct_option_border)
 
                     if(mCurrentPosition == mQuestionsList!!.size) {
-                        btnSubmit.text = "FINISH"
+                        btnSubmit.text = "ЗАВЕРШИТЬ"
                     } else {
-                        btnSubmit.text = "GO TO NEXT QUESTION"
+                        btnSubmit.text = "ДАЛЕЕ"
                     }
 
                     mSelectedOptionPosition = 0

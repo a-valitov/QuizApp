@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">QuizApp</string>
+    <string name="app_name">Dog Quiz</string>
 
-    <string name="startScreenTitle">Quiz App!</string>
+    <string name="startScreenTitle">Dog Quiz</string>
 </resources>
